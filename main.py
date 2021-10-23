@@ -1,12 +1,19 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 
 from data import *
-
+import urllib
 
 app = Flask(__name__)
 
+# DB connection
+#                                                      PLACE YOUR SERVER AND DATABASE HERE
+params = urllib.parse.quote_plus('DRIVER={SQL Server};SERVER=HARRISONS-THINK;DATABASE=LendApp;Trusted_Connection=yes;')
+app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
+db = SQLAlchemy(app)
 
 # just hello world
 @app.route('/')
@@ -25,6 +32,12 @@ def all_audiences():
     building = request.args.get("building")
     audience_type = request.args.get("type")
     number = request.args.get("number")
+
+    # SQL request for auditories (uncomment next code if start working with DB!)
+    #                                PLACE YOUR REQUEST HERE
+    # sql_request = text('select building, audience_type, number from audiences')
+    # sql_result = db.engine.execute(sql)
+    # audiences_list = [AudienceInfo(row[0],row[1],row[2]) for row in result]
 
     # filter test audiences list and select all suitable
     audiences = list(filter(lambda audience:
