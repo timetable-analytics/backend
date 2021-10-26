@@ -3,11 +3,13 @@ from flask import request
 from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
+from flask_cors import CORS
 
 from data import *
 import urllib
 
 app = Flask(__name__)
+CORS(app)
 
 # DB connection
 #                                                      PLACE YOUR SERVER AND DATABASE HERE
