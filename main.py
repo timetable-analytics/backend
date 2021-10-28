@@ -17,6 +17,7 @@ params = urllib.parse.quote_plus('DRIVER={SQL Server};SERVER=HARRISONS-THINK;DAT
 app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
 db = SQLAlchemy(app)
 
+
 # just hello world
 @app.route('/')
 def hello():
@@ -45,20 +46,19 @@ def all_audiences():
 
     # filter test audiences list and select all suitable
     audiences = list(filter(lambda audience:
-        (building is None or audience.building == building) and
-        (audience_type is None or audience.audience_type == audience_type) and
-        (number is None or audience.number == number),
-    audiences_list))
+                            (building is None or audience.building == building) and
+                            (audience_type is None or audience.audience_type == audience_type) and
+                            (number is None or audience.number == number),
+                            audiences_list))
 
     # return json with suitable audiences
-    return jsonify(countRecords=str(len(audiences)), audiences=[a.serialize() for a in audiences[limit*page:limit*(page+1)]])
-
-
+    return jsonify(countRecords=str(len(audiences)),
+                   audiences=[a.serialize() for a in audiences[limit * page:limit * (page + 1)]])
 
 
 # Для теста
 @app.route('/educators/all/', methods=["GET"])
-def all_audiences():
+def all_educators():
     # obtain parameters from get request
     fio = request.args.get("fio")
     faculty = request.args.get("faculty")
@@ -67,14 +67,12 @@ def all_audiences():
     limit = int(request.args.get("limit"))
     page = int(request.args.get("page"))
 
-
     educators = list(filter(lambda educator:
-        (fio is None or educator.fio == fio) and
-        (faculty is None or educator.faculty == faculty) and
-        (position is None or educator.position == position) and
-        (degree is None or educator.degree == degree),
-    educators_list))
+                            (fio is None or educator.fio == fio) and
+                            (faculty is None or educator.faculty == faculty) and
+                            (position is None or educator.position == position) and
+                            (degree is None or educator.degree == degree),
+                            educators_list))
 
-
-    return jsonify(countRecords=str(len(educators)), educators=[a.serialize() for a in educators[limit*page:limit*(page+1)]])
-
+    return jsonify(countRecords=str(len(educators)),
+                   educators=[a.serialize() for a in educators[limit * page:limit * (page + 1)]])
