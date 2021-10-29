@@ -70,4 +70,4 @@ def all_disciplines():
                               disciplines_list))
 
     return jsonify(countRecords=str(len(disciplines)),
-                   audiences=[a.serialize() for a in disciplines[limit * page:limit * (page + 1)]])
+                   disciplines=[a.serialize() for a in disciplines[limit * page:limit * (page + 1)]])
