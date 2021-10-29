@@ -59,7 +59,7 @@ def all_audiences():
 @app.route('/groups/all/', methods=["GET"])
 def all_group():
     # obtain parameters from get request
-    faculty = request.args.get("building")
+    faculty = request.args.get("faculty")
     program = request.args.get("program")
     name = request.args.get("name")
     course = request.args.get("course")
