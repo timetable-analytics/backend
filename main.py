@@ -17,6 +17,7 @@ params = urllib.parse.quote_plus('DRIVER={SQL Server};SERVER=HARRISONS-THINK;DAT
 app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
 db = SQLAlchemy(app)
 
+
 # just hello world
 @app.route('/')
 def hello():
@@ -47,10 +48,26 @@ def all_audiences():
 
     # filter test audiences list and select all suitable
     audiences = list(filter(lambda audience:
-        (building is None or audience.building == building) and
-        (audience_type is None or audience.audience_type == audience_type) and
-        (number is None or audience.number == number),
-    audiences_list))
+                            (building is None or audience.building == building) and
+                            (audience_type is None or audience.audience_type == audience_type) and
+                            (number is None or audience.number == number),
+                            audiences_list))
 
     # return json with suitable audiences
-    return jsonify(countRecords=str(len(audiences)), audiences=[a.serialize() for a in audiences[limit*page:limit*(page+1)]])
+    return jsonify(countRecords=str(len(audiences)),
+                   audiences=[a.serialize() for a in audiences[limit * page:limit * (page + 1)]])
+
+
+@app.route('/disciplines/all/', methods=["GET"])
+def all_disciplines():
+    # obtain parameters from get request
+    name = request.args.get("name")
+    limit = int(request.args.get("limit"))
+    page = int(request.args.get("page"))
+
+    disciplines = list(filter(lambda discipline:
+                              (name is None or discipline.name == name),
+                              disciplines_list))
+
+    return jsonify(countRecords=str(len(disciplines)),
+                   audiences=[a.serialize() for a in disciplines[limit * page:limit * (page + 1)]])

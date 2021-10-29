@@ -15,3 +15,16 @@ class AudienceInfo(object):
             "type": self.audience_type,
             "number": self.number
         }
+
+
+
+class DisciplineInfo(object):
+    name = ""
+
+    def __init__(self, name):
+        self.name = name
+
+    def serialize(self):
+        return {
+            "name": self.name
+        }
