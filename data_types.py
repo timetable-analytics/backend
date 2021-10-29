@@ -15,3 +15,24 @@ class AudienceInfo(object):
             "type": self.audience_type,
             "number": self.number
         }
+
+
+class GroupInfo(object):
+    faculty = ""
+    program = ""
+    name = ""
+    course = ""
+
+    def __init__(self, faculty, program, name, course):
+        self.faculty = faculty
+        self.program = program
+        self.name = name
+        self.course = course
+
+    def serialize(self):
+        return {
+            "faculty": self.faculty,
+            "program": self.program,
+            "name": self.name,
+            "course": self.course
+        }
