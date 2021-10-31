@@ -34,6 +34,10 @@ def all_audiences():
     building = request.args.get("building")
     audience_type = request.args.get("type")
     number = request.args.get("number")
+    limit = int(request.args.get("limit"))
+    page = int(request.args.get("page"))
+
+    # limit=10&page=1&
 
     # SQL request for auditories (uncomment next code if start working with DB!)
     #                                PLACE YOUR REQUEST HERE
@@ -49,4 +53,4 @@ def all_audiences():
     audiences_list))
 
     # return json with suitable audiences
-    return jsonify(audiences=[a.serialize() for a in audiences])
+    return jsonify(countRecords=str(len(audiences)), audiences=[a.serialize() for a in audiences[limit*page:limit*(page+1)]])
