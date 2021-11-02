@@ -41,3 +41,37 @@ class EducatorInfo(object):
             "position": self.position,
             "degree": self.degree
         }
+
+
+class DisciplineInfo(object):
+    name = ""
+
+    def __init__(self, name):
+        self.name = name
+
+    def serialize(self):
+        return {
+            "name": self.name
+        }
+      
+      
+class GroupInfo(object):
+    faculty = ""
+    program = ""
+    name = ""
+    course = ""
+
+    def __init__(self, faculty, program, name, course):
+        self.faculty = faculty
+        self.program = program
+        self.name = name
+        self.course = course
+
+    def serialize(self):
+        return {
+            "faculty": self.faculty,
+            "program": self.program,
+            "name": self.name,
+            "course": self.course
+        }
+
