@@ -17,7 +17,6 @@ class AudienceInfo(object):
         }
 
 
-
 class DisciplineInfo(object):
     name = ""
 
@@ -27,4 +26,25 @@ class DisciplineInfo(object):
     def serialize(self):
         return {
             "name": self.name
+        }
+      
+      
+class GroupInfo(object):
+    faculty = ""
+    program = ""
+    name = ""
+    course = ""
+
+    def __init__(self, faculty, program, name, course):
+        self.faculty = faculty
+        self.program = program
+        self.name = name
+        self.course = course
+
+    def serialize(self):
+        return {
+            "faculty": self.faculty,
+            "program": self.program,
+            "name": self.name,
+            "course": self.course
         }
