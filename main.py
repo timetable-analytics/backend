@@ -54,3 +54,33 @@ def all_audiences():
 
     # return json with suitable audiences
     return jsonify(countRecords=str(len(audiences)), audiences=[a.serialize() for a in audiences[limit*page:limit*(page+1)]])
+
+
+@app.route('/groups/all/', methods=["GET"])
+def all_group():
+    # obtain parameters from get request
+    faculty = request.args.get("faculty")
+    program = request.args.get("program")
+    name = request.args.get("name")
+    course = request.args.get("course")
+    limit = int(request.args.get("limit"))
+    page = int(request.args.get("page"))
+
+    # limit=10&page=1&
+
+    # SQL request for auditories (uncomment next code if start working with DB!)
+    #                                PLACE YOUR REQUEST HERE
+    # sql_request = text('select building, audience_type, number from audiences')
+    # sql_result = db.engine.execute(sql)
+    # audiences_list = [AudienceInfo(row[0],row[1],row[2]) for row in result]
+
+    # filter test audiences list and select all suitable
+    groups = list(filter(lambda group:
+        (faculty is None or group.faculty == faculty) and
+        (program is None or group.program == program) and
+        (name is None or group.name == name) and
+        (course is None or group.course == course),
+    groups_list))
+
+    # return json with suitable audiences
+    return jsonify(countRecords=str(len(groups)), groups=[a.serialize() for a in groups[limit*page:limit*(page+1)]])
