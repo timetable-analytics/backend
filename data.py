@@ -45,3 +45,29 @@ groups_list = [
     GroupInfo("МатМех", "Механика и математическое моделирование", "113", "1")
 
 ]
+
+
+disciplines_list = [
+    DisciplineInfo("Алгебра"),
+    DisciplineInfo("Геометрия1"),
+    DisciplineInfo("Геометрия2"),
+    DisciplineInfo("Геометрия3"),
+    DisciplineInfo("Геометрия4"),
+    DisciplineInfo("Геометрия5"),
+    DisciplineInfo("Геометрия6"),
+    DisciplineInfo("Геометрия7"),
+    DisciplineInfo("Геометрия8"),
+    DisciplineInfo("Геометрия9"),
+    DisciplineInfo("Геометрия10"),
+    DisciplineInfo("Геометрия11"),
+    DisciplineInfo("Геометрия12"),
+    DisciplineInfo("Геометрия13"),
+    DisciplineInfo("Геометрия14"),
+    DisciplineInfo("Геометрия15"),
+    DisciplineInfo("Геометрия16"),
+    DisciplineInfo("Геометрия17"),
+    DisciplineInfo("Геометрия18"),
+    DisciplineInfo("Геометрия19"),
+    DisciplineInfo("Геометрия20"),
+    DisciplineInfo("Геометрия21"),
+]

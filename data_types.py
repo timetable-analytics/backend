@@ -17,6 +17,18 @@ class AudienceInfo(object):
         }
 
 
+class DisciplineInfo(object):
+    name = ""
+
+    def __init__(self, name):
+        self.name = name
+
+    def serialize(self):
+        return {
+            "name": self.name
+        }
+      
+      
 class GroupInfo(object):
     faculty = ""
     program = ""
