@@ -11,5 +11,5 @@ and [Division].[name] like '%%'
 and [Educator].[full_name] like '%%'
 and [EducatorPosition].[name] like '%%'
 and [EducatorGroup].[name] like '%%'
-group by [Division].[name], [Educator].[full_name], [EducatorPosition].[name], [EducatorGroup].[name] --так как упоминается несколько раз одна и та же должность
+group by [Division].[name], [Educator].[full_name], [EducatorPosition].[name], [EducatorGroup].[name] --because there are repetitions
 order by [Educator].[full_name]
