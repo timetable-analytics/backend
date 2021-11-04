@@ -1,5 +1,5 @@
 use local_db
 select [Discipline].[name]
 from [Discipline]
-group by [Discipline].[name] --так как есть повторы
+group by [Discipline].[name] --because there are repetitions
 order by [Discipline].[name]
