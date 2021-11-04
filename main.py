@@ -17,6 +17,7 @@ params = urllib.parse.quote_plus('DRIVER={SQL Server};SERVER=HARRISONS-THINK;DAT
 app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
 db = SQLAlchemy(app)
 
+
 # just hello world
 @app.route('/')
 def hello():
@@ -37,6 +38,74 @@ def all_audiences():
     limit = int(request.args.get("limit"))
     page = int(request.args.get("page"))
 
+    # SQL request for auditories (uncomment next code if start working with DB!)
+    #                                PLACE YOUR REQUEST HERE
+    # sql_request = text('select building, audience_type, number from audiences')
+    # sql_result = db.engine.execute(sql)
+    # audiences_list = [AudienceInfo(row[0],row[1],row[2]) for row in result]
+
+    # filter test audiences list and select all suitable
+    audiences = list(filter(lambda audience:
+                            (building is None or audience.building == building) and
+                            (audience_type is None or audience.audience_type == audience_type) and
+                            (number is None or audience.number == number),
+                            audiences_list))
+
+    # return json with suitable audiences
+    return jsonify(countRecords=str(len(audiences)),
+                   audiences=[a.serialize() for a in audiences[limit * page:limit * (page + 1)]])
+
+
+# Для теста
+@app.route('/educators/all/', methods=["GET"])
+def all_educators():
+    # obtain parameters from get request
+    fio = request.args.get("fio")
+    faculty = request.args.get("faculty")
+    position = request.args.get("position")
+    degree = request.args.get("degree")
+    limit = int(request.args.get("limit"))
+    page = int(request.args.get("page"))
+
+    educators = list(filter(lambda educator:
+                            (fio is None or educator.fio == fio) and
+                            (faculty is None or educator.faculty == faculty) and
+                            (position is None or educator.position == position) and
+                            (degree is None or educator.degree == degree),
+                            educators_list))
+
+    return jsonify(countRecords=str(len(educators)),
+                   educators=[a.serialize() for a in educators[limit * page:limit * (page + 1)]])
+  
+
+
+  
+@app.route('/disciplines/all/', methods=["GET"])
+def all_disciplines():
+    # obtain parameters from get request
+    name = request.args.get("name")
+    limit = int(request.args.get("limit"))
+    page = int(request.args.get("page"))
+
+    disciplines = list(filter(lambda discipline:
+                              (name is None or discipline.name == name),
+                              disciplines_list))
+
+    return jsonify(countRecords=str(len(disciplines)),
+                   disciplines=[a.serialize() for a in disciplines[limit * page:limit * (page + 1)]])
+
+  
+
+@app.route('/groups/all/', methods=["GET"])
+def all_group():
+    # obtain parameters from get request
+    faculty = request.args.get("faculty")
+    program = request.args.get("program")
+    name = request.args.get("name")
+    course = request.args.get("course")
+    limit = int(request.args.get("limit"))
+    page = int(request.args.get("page"))
+
     # limit=10&page=1&
 
     # SQL request for auditories (uncomment next code if start working with DB!)
@@ -46,11 +115,12 @@ def all_audiences():
     # audiences_list = [AudienceInfo(row[0],row[1],row[2]) for row in result]
 
     # filter test audiences list and select all suitable
-    audiences = list(filter(lambda audience:
-        (building is None or audience.building == building) and
-        (audience_type is None or audience.audience_type == audience_type) and
-        (number is None or audience.number == number),
-    audiences_list))
+    groups = list(filter(lambda group:
+        (faculty is None or group.faculty == faculty) and
+        (program is None or group.program == program) and
+        (name is None or group.name == name) and
+        (course is None or group.course == course),
+    groups_list))
 
     # return json with suitable audiences
-    return jsonify(countRecords=str(len(audiences)), audiences=[a.serialize() for a in audiences[limit*page:limit*(page+1)]])
+    return jsonify(countRecords=str(len(groups)), groups=[a.serialize() for a in groups[limit*page:limit*(page+1)]])
