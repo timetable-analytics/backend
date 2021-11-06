@@ -4,7 +4,7 @@ select 	[Address].[address],
 		[Educator].[full_name], 
 		[Discipline].[name], 
 		[Group_union].[name], 
-		(convert(nvarchar, [Event].[start]) + ' - ' + ltrim(right(convert(varchar(20), [Event].[end], 100), 7))),
+		(convert(nvarchar, [Event].[start]) + ' - ' + ltrim(right(convert(varchar(20), [Event].[end], 100), 7)))
 from	[Address], 
 		[Classroom], 
 		[Educator], 
