@@ -19,6 +19,7 @@ class AudienceInfo(object):
             "number": self.number
         }
 
+
 class EducatorInfo(object):
     id = ""
     fio = ""
@@ -44,24 +45,29 @@ class EducatorInfo(object):
 
 
 class DisciplineInfo(object):
+    id = ""
     name = ""
 
-    def __init__(self, name):
+    def __init__(self, id, name):
+        self.id = id
         self.name = name
 
     def serialize(self):
         return {
+            "id": self.id,
             "name": self.name
         }
-      
-      
+
+
 class GroupInfo(object):
+    id = ""
     faculty = ""
     program = ""
     name = ""
     course = ""
 
-    def __init__(self, faculty, program, name, course):
+    def __init__(self, id, faculty, program, name, course):
+        self.id = id
         self.faculty = faculty
         self.program = program
         self.name = name
@@ -69,9 +75,37 @@ class GroupInfo(object):
 
     def serialize(self):
         return {
+            "id": self.id,
             "faculty": self.faculty,
             "program": self.program,
             "name": self.name,
             "course": self.course
         }
 
+class TimetableInfo(object):
+    id = ""
+    building = ""
+    classroom_name = ""
+    fio = ""
+    discipline = ""
+    group = ""
+    time = ""
+
+    def __init__(self, _id, _building, _fio, _discipline, _group, _time):
+        self.id= _id
+        self.building = _building
+        self.fio = _fio
+        self.discipline = _discipline
+        self.group = _group
+        self.time = _time
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "building": self.building,
+            "classroom_name": self.classroom_name,
+            "fio": self.fio,
+            "name": self.discipline,
+            "stGroups": self.group,
+            "time": self.time
+        }

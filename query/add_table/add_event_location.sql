@@ -9,3 +9,4 @@ create table EventLocation (
 );
 INSERT into [local_db].[dbo].[EventLocation]([id]) SELECT [timetable-live].[dbo].[EventLocation].[Oid] from [timetable-live].[dbo].[EventLocation];
 update [local_db].[dbo].[EventLocation] set [event] = (select [timetable-live].[dbo].[EventLocation].[Event] from [timetable-live].[dbo].[EventLocation] where [local_db].[dbo].[EventLocation].id = [timetable-live].[dbo].[EventLocation].Oid);
+update [local_db].[dbo].[EventLocation] set classroom = (select [timetable-live].[dbo].[EventLocation].[Location] from [timetable-live].[dbo].[EventLocation] where [local_db].[dbo].[EventLocation].id = [timetable-live].[dbo].[EventLocation].Oid);
