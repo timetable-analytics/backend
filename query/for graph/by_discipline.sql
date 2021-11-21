@@ -6,7 +6,7 @@ select count([Event].[id]),
 from [Event],
 	[Discipline]
 where [Discipline].[id] = [Event].[discipline]
-and [Event].[id] in (/* list id in '' separated by , */)
+and [Event].[id] in (/* list id in '' separated by , (for example '1', '2')*/)
 --/* for day */ group by (convert(date, [Event].[start])), [Discipline].[name]
 --/* for month */ group by (convert(varchar,year([Event].[start])) + '-' + convert(varchar,month([Event].[start]))) , [Discipline].[name] 
 --/* for year */ group by year([Event].[start]), [Discipline].[name]
