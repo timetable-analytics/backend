@@ -22,6 +22,6 @@ and [EducatorEmployment].[id] = [EducatorAssigmentUnit].[educator_employment]
 and [Event].[educator_assigment] = [EducatorAssigmentUnit].[educator_assigment]
 and [Event].[discipline] = [Discipline].[id]
 and [Group_union].[id] = [Event].[group_union]
-and [Group_union].[id] in (/* list id in '' separated by , */)
+and [Group_union].[id] in (/* list id in '' separated by , (for example '1', '2')*/)
 and convert(date, [Event].[start]) >= /*'yyy-mm-dd'*/
 and convert(date, [Event].[end]) <= /*'yyyy-mm-dd'*/
