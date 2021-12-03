@@ -1,15 +1,9 @@
 use local_db
-select [Educator].[id], [Division].[name], [Educator].[full_name], [EducatorPosition].[name], [EducatorGroup].[name]
-from [Division], [Educator], [EducatorPosition], [EducatorGroup], [EducatorEmployment], [EducatorDivision]
-where [Division].[id] = [EducatorDivision].[division]
-and [Educator].[id] = [EducatorEmployment].[educator]
-and [EducatorPosition].[id] = [EducatorEmployment].[position]
-and [EducatorGroup].[id] = [EducatorEmployment].[educator_group]
-and [EducatorEmployment].[id] = [EducatorDivision].[educator_employment]
-and [EducatorEmployment].[is_active] = 1
-and [Division].[name] like '%%'
-and [Educator].[full_name] like '%%'
-and [EducatorPosition].[name] like '%%'
-and [EducatorGroup].[name] like '%%'
-group by [Division].[name], [Educator].[full_name], [EducatorPosition].[name], [EducatorGroup].[name], [Educator].[id]
-order by [Educator].[full_name]
+select [Educator_view].[id], [Educator_view].[division], [Educator_view].[full_name], [Educator_view].[position], [Educator_view].[educator_group]
+from [Educator_view]
+where [Educator_view].[is_active] = 1
+and [Educator_view].[division] like '%%'
+and [Educator_view].[full_name] like '%%'
+and [Educator_view].[position] like '%%'
+and [Educator_view].[educator_group] like '%%'
+order by [Educator_view].[full_name]
