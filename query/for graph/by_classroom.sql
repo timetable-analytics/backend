@@ -10,7 +10,7 @@ from [Event],
 where [Classroom].[address] = [Address].[id]
 and [Classroom].[id] = [EventLocation].[classroom]
 and [EventLocation].[event] = [Event].[id]
-and [Event].[id] in (/* list id in '' separated by , */)
+and [Event].[id] in (/* list id in '' separated by , (for example '1', '2')*/)
 --/* for day */ group by (convert(date, [Event].[start])), ([Address].[address] + ', ' + [Classroom].[name]) 
 --/* for month */ group by (convert(varchar,year([Event].[start])) + '-' + convert(varchar,month([Event].[start]))) , ([Address].[address] + ', ' + [Classroom].[name]) 
 --/* for year */ group by year([Event].[start]), ([Address].[address] + ', ' + [Classroom].[name])
