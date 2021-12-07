@@ -1,9 +1,10 @@
 use local_db
-select [Group_union].[id], [Division].[name], [Group_union].[name], [Group_union].[course]
-from [Division], [Group_union], [Group_union_Division]
-where [Division].[id] = [Group_union_Division].[division]
-and [Group_union].[id] = [Group_union_Division].[group_union]
-and [Division].[name] like '%%'
-and [Group_union].[name] like '%%'
-and [Group_union].[course] like '%%'
-order by [Group_union].[name]
+select [dbo].[Students_group_view].[id],
+	[dbo].[Students_group_view].[division],
+	[dbo].[Students_group_view].[group],
+	[dbo].[Students_group_view].[course]
+from [dbo].[Students_group_view]
+where [dbo].[Students_group_view].[division] like '%%'
+and [dbo].[Students_group_view].[group] like '%%'
+and [dbo].[Students_group_view].[course] like '%%'
+order by [dbo].[Students_group_view].[group]
