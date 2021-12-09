@@ -1,0 +1,11 @@
+USE [local_db]
+GO
+
+/****** Object:  Index [NonClusteredIndex-20211209-225927]    Script Date: 09.12.2021 23:08:57 ******/
+CREATE NONCLUSTERED INDEX [NonClusteredIndex-20211209-225927] ON [dbo].[EducatorAssigmentUnit]
+(
+	[educator_employment] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+
+
